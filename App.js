@@ -1,24 +1,66 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, FlatList, Alert, View } from "react-native";
+
+import Navbar from "./src/Navbar";
+import AddTodo from "./src/AddTodo";
+import Todo from "./src/Todo";
 
 export default function App() {
+  const [todos, setTodos] = useState([]);
+  const [userValue, setUserValue] = useState(null);
+
+  const handleSetUserValue = (value) => setUserValue(value);
+
+  const handleAddTodo = (todo) => {
+    if (todo === null || (todo !== null && !todo.trim())) {
+      Alert.alert("Todo can't be empty", "Write anything");
+    } else {
+      const newTodo = { id: Date.now().toString(), title: todo };
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+
+      setUserValue(null);
+    }
+  };
+
+  const handleLongPressTodo = (id) =>
+    Alert.alert(
+      "Delete?",
+      "",
+      [
+        { text: "No", onPress: () => {} },
+        {
+          text: "Yes",
+          onPress: () =>
+            setTodos((prev) => prev.filter((todo) => todo.id !== id)),
+        },
+      ],
+      { cancelable: true }
+    );
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Ну чо</Text>
-      <StatusBar style="auto" />
+    <View>
+      <Navbar />
+      <View style={styles.wrapper}>
+        <AddTodo
+          onSubmit={handleAddTodo}
+          userValue={userValue}
+          onSetUserValue={handleSetUserValue}
+        />
+        <FlatList
+          data={todos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <Todo todo={item} onLongPressTodo={handleLongPressTodo} />
+          )}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000",
-    alignItems: "center",
-    justifyContent: "center",
+  wrapper: {
+    paddingHorizontal: 20,
   },
-  text: {
-    color: "#fff",
-  },
+  scrollTodos: {},
 });

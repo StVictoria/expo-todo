@@ -1,0 +1,17 @@
+{
+	"imports in expo": {
+		"scope": "javascript,typescript",
+		"prefix": "expoimp",
+		"body": [
+			"import React from 'react'; import {View, Text, StyleSheet} from 'react-native'"
+		]
+	},
+
+	"export default custom function" : {
+		"scope": "javascript,typescript",
+		"prefix": "cedf",
+		"body": [
+			"export default function $1 ($2) {return <View>$3</View> }"
+		]
+	}
+}

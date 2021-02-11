@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { StyleSheet, FlatList, Alert, View } from "react-native";
+import {
+  View,
+  FlatList,
+  Alert,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+} from "react-native";
 
 import Navbar from "./src/Navbar";
 import AddTodo from "./src/AddTodo";
@@ -7,18 +14,25 @@ import Todo from "./src/Todo";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  const [userValue, setUserValue] = useState(null);
+  const [userValues, setUserValues] = useState({
+    task: null,
+    amount: null,
+    deadline: null,
+    notice: null,
+  });
 
-  const handleSetUserValue = (value) => setUserValue(value);
+  const handleSetUserValues = (value, field) => {
+    setUserValues((prev) => ({ ...prev, [field.name]: value }));
+  };
 
   const handleAddTodo = (todo) => {
-    if (todo === null || (todo !== null && !todo.trim())) {
+    if (todo.task === null || (todo.task !== null && !todo.task.trim())) {
       Alert.alert("Todo can't be empty", "Write anything");
     } else {
-      const newTodo = { id: Date.now().toString(), title: todo };
+      const newTodo = { id: Date.now().toString(), userFields: todo };
       setTodos((prevTodos) => [...prevTodos, newTodo]);
 
-      setUserValue(null);
+      setUserValues({ task: null, amount: null, deadline: null, notice: null });
     }
   };
 
@@ -38,13 +52,14 @@ export default function App() {
     );
 
   return (
-    <View>
+    <ScrollView>
+      <StatusBar hidden={true} />
       <Navbar />
       <View style={styles.wrapper}>
         <AddTodo
           onSubmit={handleAddTodo}
-          userValue={userValue}
-          onSetUserValue={handleSetUserValue}
+          userValues={userValues}
+          onSetUserValues={handleSetUserValues}
         />
         <FlatList
           data={todos}
@@ -54,12 +69,13 @@ export default function App() {
           )}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
+    paddingVertical: 30,
     paddingHorizontal: 20,
   },
   scrollTodos: {},

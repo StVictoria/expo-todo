@@ -1,10 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
+
+import menu from "../assets/menu.png";
+import bank from "../assets/bank.png";
 
 export default function Navbar() {
   return (
     <View style={styles.navbar}>
-      <Text style={styles.text}>To Do App</Text>
+      <View style={styles.logoSide}>
+        <Image source={menu} style={styles.menuImg} />
+        <Text style={styles.logoText}>To Do To Earn</Text>
+      </View>
+      <View style={styles.accountSide}>
+        <Text style={styles.accountMoney}>2600</Text>
+        <Image source={bank} style={styles.menuImg} />
+      </View>
     </View>
   );
 }
@@ -12,13 +22,33 @@ export default function Navbar() {
 const styles = StyleSheet.create({
   navbar: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
-    height: 70,
-    backgroundColor: "#000",
+    height: 90,
+    paddingHorizontal: 25,
+    backgroundColor: "#0E0034",
   },
-  text: {
+  logoSide: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "48%",
+  },
+  menuImg: {
+    width: 20,
+    height: 20,
+  },
+  logoText: {
     fontSize: 18,
-    color: "#fff",
+    color: "#f2f2f2",
+  },
+  accountSide: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  accountMoney: {
+    color: "#f2f2f2",
+    marginRight: 10,
   },
 });

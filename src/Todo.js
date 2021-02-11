@@ -2,10 +2,14 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 
 export default function Todo({ todo, onLongPressTodo }) {
+  const fieldValue = todo.userFields;
   return (
     <TouchableOpacity onLongPress={() => onLongPressTodo(todo.id)}>
       <View>
-        <Text style={styles.todo}>{todo.title}</Text>
+        <Text style={styles.todo}>
+          {fieldValue.task} {fieldValue.amount} {fieldValue.deadline}{" "}
+          {fieldValue.notice}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -13,6 +17,7 @@ export default function Todo({ todo, onLongPressTodo }) {
 
 const styles = StyleSheet.create({
   todo: {
+    flexDirection: "row",
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: "grey",

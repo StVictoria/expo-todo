@@ -1,20 +1,46 @@
 import React from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Text, Button, StyleSheet } from "react-native";
 
-export default function AddTodo({ userValue, onSetUserValue, onSubmit }) {
+const fields = [
+  {
+    id: 1,
+    name: "task",
+    title: "Что необходимо сделать?",
+    placeholder: "Например, прочитать книгу",
+  },
+  { id: 2, name: "amount", title: "Награда", placeholder: "800" },
+  { id: 3, name: "deadline", title: "Дедлайн", placeholder: "20.02.2021" },
+  {
+    id: 4,
+    name: "notice",
+    title: "Примечание",
+    placeholder: "",
+  },
+];
+
+export default function AddTodo({ userValues, onSetUserValues, onSubmit }) {
+  const renderTextFields = () =>
+    fields.map((field) => (
+      <>
+        <Text style={styles.label}>{field.title}</Text>
+        <TextInput
+          autoCorrect={false}
+          autoCapitalize="none"
+          placeholder={field.placeholder}
+          value={userValues[field.name]}
+          onChange={({ nativeEvent }) =>
+            onSetUserValues(nativeEvent.text, field)
+          }
+          style={styles.textInput}
+        />
+      </>
+    ));
   return (
     <View style={styles.addTodoBlock}>
-      <TextInput
-        autoCorrect={false}
-        autoCapitalize="none"
-        placeholder="Input to do"
-        value={userValue}
-        onChangeText={(text) => onSetUserValue(text)}
-        style={styles.textInput}
-      />
+      {renderTextFields()}
       <Button
         title="Add"
-        onPress={() => onSubmit(userValue)}
+        onPress={() => onSubmit(userValues)}
         style={styles.button}
       />
     </View>
@@ -23,16 +49,24 @@ export default function AddTodo({ userValue, onSetUserValue, onSubmit }) {
 
 const styles = StyleSheet.create({
   addTodoBlock: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "grey",
+    borderRadius: 5,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+  },
+  label: {
+    marginBottom: 5,
   },
   textInput: {
-    width: "80%",
+    width: "100%",
     padding: 10,
+    marginBottom: 20,
     borderStyle: "solid",
-    borderBottomWidth: 1,
-    borderBottomColor: "#777",
+    borderWidth: 1,
+    borderColor: "#777",
+    borderRadius: 5,
   },
   button: {},
 });

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import {
   View,
-  FlatList,
-  Alert,
   ScrollView,
+  Alert,
   StatusBar,
   StyleSheet,
+  FlatList,
 } from "react-native";
 
 import Navbar from "./src/Navbar";
 import AddTodo from "./src/addTodo/AddTodo";
 import Todo from "./src/common/Todo";
+import Menu from "./src/menu/Menu";
 
 export default function App() {
   const [money, setMoney] = useState(0);
@@ -62,28 +63,33 @@ export default function App() {
   };
 
   return (
-    <View>
+    <>
       <StatusBar hidden={true} />
-      <Navbar account={money} />
-      <View style={styles.wrapper}>
-        <AddTodo
-          onSubmit={handleAddTodo}
-          userValues={userValues}
-          onSetUserValues={handleSetUserValues}
-        />
-        <FlatList
-          data={todos}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Todo
-              todo={item}
-              onTodoDone={handleTodoDone}
-              onLongPressTodo={handleLongPressTodo}
+      <View>
+        <Navbar account={money} />
+        {/* <ScrollView style={styles.wrapper}> */}
+        {/* <AddTodo
+            onSubmit={handleAddTodo}
+            userValues={userValues}
+            onSetUserValues={handleSetUserValues}
+          /> */}
+        {/* <ScrollView>
+            <FlatList
+              data={todos}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <Todo
+                  todo={item}
+                  onTodoDone={handleTodoDone}
+                  onLongPressTodo={handleLongPressTodo}
+                />
+              )}
             />
-          )}
-        />
+          </ScrollView> */}
+        {/* </ScrollView> */}
+        <Menu />
       </View>
-    </View>
+    </>
   );
 }
 

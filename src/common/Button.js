@@ -20,6 +20,7 @@ export default function Button({ name, color, userValues, onClick }) {
   return (
     <TouchableHighlight
       title={name}
+      underlayColor="green"
       onPress={() => onClick(userValues)}
       style={styles.submitButton}
     >

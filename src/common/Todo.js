@@ -11,8 +11,12 @@ export default function Todo({ todo, onTodoDone, onLongPressTodo }) {
       <Text onPress={() => onTodoDone(todo.id, fieldValue.amount)}>DONE</Text>
       <Text style={styles.todoTask}>{fieldValue.task}</Text>
       <View>
-        <Text style={styles.todoRest}>{fieldValue.amount} </Text>
-        <Text style={styles.todoRest}>до {fieldValue.deadline}</Text>
+        {fieldValue.amount && (
+          <Text style={styles.todoRest}>{fieldValue.amount}</Text>
+        )}
+        {fieldValue.deadline && (
+          <Text style={styles.todoRest}>до {fieldValue.deadline}</Text>
+        )}
       </View>
     </TouchableOpacity>
   );

@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import menu from "../assets/menu.png";
 import bank from "../assets/bank.png";
 
-export default function Navbar() {
+export default function Navbar({ account }) {
   return (
     <View style={styles.navbar}>
       <View style={styles.logoSide}>
@@ -12,7 +12,7 @@ export default function Navbar() {
         <Text style={styles.logoText}>To Do To Earn</Text>
       </View>
       <View style={styles.accountSide}>
-        <Text style={styles.accountMoney}>2600</Text>
+        <Text style={styles.accountMoney}>{account}</Text>
         <Image source={bank} style={styles.menuImg} />
       </View>
     </View>

@@ -1,13 +1,14 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 
-export default function Todo({ todo, onLongPressTodo }) {
+export default function Todo({ todo, onTodoDone, onLongPressTodo }) {
   const fieldValue = todo.userFields;
   return (
     <TouchableOpacity
       style={styles.todoButton}
       onLongPress={() => onLongPressTodo(todo.id)}
     >
+      <Text onPress={() => onTodoDone(todo.id, fieldValue.amount)}>DONE</Text>
       <Text style={styles.todoTask}>{fieldValue.task}</Text>
       <View>
         <Text style={styles.todoRest}>{fieldValue.amount} </Text>

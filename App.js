@@ -13,6 +13,7 @@ import AddTodo from "./src/addTodo/AddTodo";
 import Todo from "./src/common/Todo";
 
 export default function App() {
+  const [money, setMoney] = useState(0);
   const [todos, setTodos] = useState([]);
   const [userValues, setUserValues] = useState({
     task: null,
@@ -54,10 +55,16 @@ export default function App() {
       { cancelable: true }
     );
 
+  const handleTodoDone = (id, reward) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+
+    setMoney((prev) => Number(prev) + Number(reward));
+  };
+
   return (
     <View>
       <StatusBar hidden={true} />
-      <Navbar />
+      <Navbar account={money} />
       <View style={styles.wrapper}>
         <AddTodo
           onSubmit={handleAddTodo}
@@ -68,7 +75,11 @@ export default function App() {
           data={todos}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <Todo todo={item} onLongPressTodo={handleLongPressTodo} />
+            <Todo
+              todo={item}
+              onTodoDone={handleTodoDone}
+              onLongPressTodo={handleLongPressTodo}
+            />
           )}
         />
       </View>

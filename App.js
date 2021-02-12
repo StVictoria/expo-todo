@@ -7,11 +7,16 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import Navbar from "./src/Navbar";
-import AddTodo from "./src/addTodo/AddTodo";
+import AddTodoScreen from "./src/addTodo/AddTodoScreen";
 import Todo from "./src/common/Todo";
-import Menu from "./src/menu/Menu";
+import MenuScreen from "./src/menu/MenuScreen";
+import AccountScreen from "./src/account/AccountScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   const [money, setMoney] = useState(0);
@@ -22,6 +27,8 @@ export default function App() {
     deadline: null,
     notice: null,
   });
+  const [availableMoney, setAvailableMoney] = useState(1000);
+  const [spentMoney, setSpentMoney] = useState(null);
 
   const handleSetUserValues = (value, field) => {
     setUserValues((prev) => ({ ...prev, [field.name]: value }));
@@ -62,18 +69,61 @@ export default function App() {
     setMoney((prev) => Number(prev) + Number(reward));
   };
 
+  const handleChangeAccountValues = (value, field) => {
+    if (field.name === "spentMoney") {
+      setSpentMoney(value);
+    } else if (field.name === "availableMoney") {
+      setAvailableMoney(value);
+    }
+  };
+
+  const handleCountAccountValues = (name) => {
+    if (name === "spentMoney") {
+      setSpentMoney(spentMoney);
+      setMoney((prev) => Number(prev) - Number(spentMoney));
+      setSpentMoney(null);
+    } else if (name === "availableMoney") {
+      setAvailableMoney(availableMoney);
+    }
+  };
   return (
     <>
       <StatusBar hidden={true} />
-      <View>
-        <Navbar account={money} />
-        {/* <ScrollView style={styles.wrapper}> */}
-        {/* <AddTodo
-            onSubmit={handleAddTodo}
-            userValues={userValues}
-            onSetUserValues={handleSetUserValues}
-          /> */}
-        {/* <ScrollView>
+      <Navbar account={money} />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="AddTodo"
+            options={{ headerStyle: { height: 0 }, title: "" }}
+          >
+            {(props) => (
+              <AddTodoScreen
+                onSubmit={handleAddTodo}
+                userValues={userValues}
+                onSetUserValues={handleSetUserValues}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen
+            name="Menu"
+            options={{ headerStyle: { height: 0 }, title: "" }}
+            component={MenuScreen}
+          />
+          <Stack.Screen
+            name="Account"
+            options={{ headerStyle: { height: 0 }, title: "" }}
+          >
+            {(props) => (
+              <AccountScreen
+                money={money}
+                spentMoney={spentMoney}
+                availableMoney={availableMoney}
+                onChange={handleChangeAccountValues}
+                onSubmit={handleCountAccountValues}
+              />
+            )}
+          </Stack.Screen>
+          {/* <ScrollView>
             <FlatList
               data={todos}
               keyExtractor={(item) => item.id}
@@ -86,9 +136,8 @@ export default function App() {
               )}
             />
           </ScrollView> */}
-        {/* </ScrollView> */}
-        <Menu />
-      </View>
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 }
@@ -96,7 +145,7 @@ export default function App() {
 const styles = StyleSheet.create({
   wrapper: {
     paddingVertical: 30,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
   },
   scrollTodos: {},
 });

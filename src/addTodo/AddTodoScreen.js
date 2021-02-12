@@ -55,12 +55,6 @@ const styles = StyleSheet.create({
   addTodoBlock: {
     justifyContent: "center",
     alignItems: "center",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "grey",
-    borderRadius: 5,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
   },
   fieldContainer: {
     width: "100%",

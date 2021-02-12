@@ -1,15 +1,13 @@
 import React from "react";
 import { Text, StyleSheet, TouchableHighlight } from "react-native";
 
-export default function Button({ name, color, userValues, onClick }) {
+export default function Button({ name, color, values, onClick }) {
   const styles = StyleSheet.create({
     submitButton: {
       alignItems: "center",
-      width: "45%",
       borderRadius: 50,
       backgroundColor: color,
       padding: 15,
-      marginTop: 15,
     },
     text: {
       color: "#ffffff",
@@ -20,11 +18,11 @@ export default function Button({ name, color, userValues, onClick }) {
   return (
     <TouchableHighlight
       title={name}
-      underlayColor="green"
-      onPress={() => onClick(userValues)}
+      underlayColor={color}
+      onPress={() => onClick(values)}
       style={styles.submitButton}
     >
-      <Text style={styles.text}>Добавить</Text>
+      <Text style={styles.text}>{name}</Text>
     </TouchableHighlight>
   );
 }

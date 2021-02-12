@@ -9,8 +9,8 @@ import {
 } from "react-native";
 
 import Navbar from "./src/Navbar";
-import AddTodo from "./src/AddTodo";
-import Todo from "./src/Todo";
+import AddTodo from "./src/addTodo/AddTodo";
+import Todo from "./src/common/Todo";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -27,7 +27,10 @@ export default function App() {
 
   const handleAddTodo = (todo) => {
     if (todo.task === null || (todo.task !== null && !todo.task.trim())) {
-      Alert.alert("Todo can't be empty", "Write anything");
+      Alert.alert(
+        "Задача не должна быть пустой",
+        "Напишите что необходимо сделать"
+      );
     } else {
       const newTodo = { id: Date.now().toString(), userFields: todo };
       setTodos((prevTodos) => [...prevTodos, newTodo]);
@@ -38,12 +41,12 @@ export default function App() {
 
   const handleLongPressTodo = (id) =>
     Alert.alert(
-      "Delete?",
-      "",
+      "Удалить задачу?",
+      "Задачу нельзя будет вернуть. Средства не начислятся, т.к. задача не выполнена :(",
       [
-        { text: "No", onPress: () => {} },
+        { text: "Отмена", onPress: () => {} },
         {
-          text: "Yes",
+          text: "Удалить",
           onPress: () =>
             setTodos((prev) => prev.filter((todo) => todo.id !== id)),
         },
@@ -52,7 +55,7 @@ export default function App() {
     );
 
   return (
-    <ScrollView>
+    <View>
       <StatusBar hidden={true} />
       <Navbar />
       <View style={styles.wrapper}>
@@ -69,7 +72,7 @@ export default function App() {
           )}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 }
 

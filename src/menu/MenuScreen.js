@@ -1,19 +1,23 @@
 import React from "react";
-import { View, ScrollView, Text, StyleSheet } from "react-native";
+import { TouchableHighlight, ScrollView, Text, StyleSheet } from "react-native";
 
 const menuTiles = [
-  { id: 1, title: "Новая задача", color: "orange" },
-  { id: 2, title: "Мои задачи", color: "purple" },
-  { id: 3, title: "Мой счёт", color: "lime" },
-  { id: 4, title: "Настройки", color: "aqua" },
+  { id: 1, title: "Новая задача", color: "orange", link: "AddTodo" },
+  { id: 2, title: "Мои задачи", color: "purple", link: "MyTodos" },
+  { id: 3, title: "Мой счёт", color: "lime", link: "Account" },
+  { id: 4, title: "Настройки", color: "aqua", link: "Settings" },
 ];
 
-export default function Menu() {
+export default function Menu({ navigation }) {
   const renderMenuTiles = (tiles) =>
     tiles.map((tile) => (
-      <View key={tile.id} style={styles.tile}>
+      <TouchableHighlight
+        key={tile.id}
+        style={styles.tile}
+        onPress={() => navigation.navigate(tile.link)}
+      >
         <Text style={styles.tileTitle}>{tile.title}</Text>
-      </View>
+      </TouchableHighlight>
     ));
   return (
     <ScrollView contentContainerStyle={styles.menu}>

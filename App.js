@@ -91,7 +91,12 @@ export default function App() {
       <StatusBar hidden={true} />
       <Navbar account={money} />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Menu">
+          <Stack.Screen
+            name="Menu"
+            options={{ headerStyle: { height: 0 }, title: "" }}
+            component={MenuScreen}
+          />
           <Stack.Screen
             name="AddTodo"
             options={{ headerStyle: { height: 0 }, title: "" }}
@@ -104,11 +109,7 @@ export default function App() {
               />
             )}
           </Stack.Screen>
-          <Stack.Screen
-            name="Menu"
-            options={{ headerStyle: { height: 0 }, title: "" }}
-            component={MenuScreen}
-          />
+
           <Stack.Screen
             name="Account"
             options={{ headerStyle: { height: 0 }, title: "" }}

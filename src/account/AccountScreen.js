@@ -28,9 +28,27 @@ export default function Account({
   money,
   spentMoney,
   availableMoney,
-  onChange,
-  onSubmit,
+  setSpentMoney,
+  setAvailableMoney,
 }) {
+  const handleCountAccountValues = (name) => {
+    if (name === "spentMoney") {
+      setSpentMoney(spentMoney);
+      setMoney((prev) => Number(prev) - Number(spentMoney));
+      setSpentMoney(null);
+    } else if (name === "availableMoney") {
+      setAvailableMoney(availableMoney);
+    }
+  };
+
+  const handleChangeAccountValues = (value, field) => {
+    if (field.name === "spentMoney") {
+      setSpentMoney(value);
+    } else if (field.name === "availableMoney") {
+      setAvailableMoney(value);
+    }
+  };
+
   const renderAccountFields = () =>
     accountFields.map((field) => (
       <View key={field.id} style={styles.formContainer}>
@@ -46,7 +64,9 @@ export default function Account({
               placeholder={field.placeholder}
               value={field.name === "spentMoney" ? spentMoney : availableMoney}
               style={styles.textInput}
-              onChange={({ nativeEvent }) => onChange(nativeEvent.text, field)}
+              onChange={({ nativeEvent }) =>
+                handleChangeAccountValues(nativeEvent.text, field)
+              }
             />
           ) : (
             <Text style={styles.earnedField}>{money}</Text>
@@ -56,7 +76,7 @@ export default function Account({
           <Button
             name="Рассчитать остаток"
             color="#0E0034"
-            onClick={() => onSubmit(field.name)}
+            onClick={() => handleCountAccountValues(field.name)}
           />
         )}
         {field.name === "availableMoney" && (

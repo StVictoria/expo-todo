@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, Text, StyleSheet } from "react-native";
+import { View, TextInput, Text, Alert, StyleSheet } from "react-native";
 
 import Button from "../common/Button";
 
@@ -20,7 +20,28 @@ const fields = [
   },
 ];
 
-export default function AddTodo({ userValues, onSetUserValues, onSubmit }) {
+export default function AddTodo({ userValues, setUserValues, setTodos }) {
+  const handleSetUserValues = (value, field) => {
+    setUserValues((prev) => ({ ...prev, [field.name]: value }));
+  };
+
+  const handleAddTodo = () => {
+    if (
+      userValues.task === null ||
+      (userValues.task !== null && !userValues.task.trim())
+    ) {
+      Alert.alert(
+        "Задача не должна быть пустой",
+        "Напишите что необходимо сделать"
+      );
+    } else {
+      const newTodo = { id: Date.now().toString(), userFields: userValues };
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+
+      setUserValues({ task: null, amount: null, deadline: null, notice: null });
+    }
+  };
+
   const renderTextFields = () =>
     fields.map((field) => (
       <>
@@ -32,7 +53,7 @@ export default function AddTodo({ userValues, onSetUserValues, onSubmit }) {
           placeholder={field.placeholder}
           value={userValues[field.name]}
           onChange={({ nativeEvent }) =>
-            onSetUserValues(nativeEvent.text, field)
+            handleSetUserValues(nativeEvent.text, field)
           }
           style={styles.textInput}
         />
@@ -45,7 +66,7 @@ export default function AddTodo({ userValues, onSetUserValues, onSubmit }) {
         name="Добавить"
         color="#37AC0A"
         userValues={userValues}
-        onClick={onSubmit}
+        onClick={handleAddTodo}
       />
     </View>
   );

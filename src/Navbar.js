@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 import menu from "../assets/menu.png";
 import bank from "../assets/bank.png";
@@ -7,14 +7,16 @@ import bank from "../assets/bank.png";
 export default function Navbar({ account }) {
   return (
     <View style={styles.navbar}>
+      <TouchableOpacity onPress={() => navigation.navigator("Account")}>
+        <Image source={menu} style={styles.navButton} />
+      </TouchableOpacity>
       <View style={styles.logoSide}>
-        <Image source={menu} style={styles.menuImg} />
         <Text style={styles.logoText}>To Do To Earn</Text>
       </View>
-      <View style={styles.accountSide}>
-        <Text style={styles.accountMoney}>{account}</Text>
-        <Image source={bank} style={styles.menuImg} />
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigator("Account")}>
+        <Text>{account}</Text>
+        <Image source={bank} style={styles.navButton} />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -24,19 +26,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 90,
-    paddingHorizontal: 25,
+    width: "100%",
     backgroundColor: "#0E0034",
+    height: 90,
+    paddingHorizontal: 20,
   },
   logoSide: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "48%",
-  },
-  menuImg: {
-    width: 20,
-    height: 20,
+    width: "46%",
   },
   logoText: {
     fontSize: 18,
@@ -50,5 +49,9 @@ const styles = StyleSheet.create({
   accountMoney: {
     color: "#f2f2f2",
     marginRight: 10,
+  },
+  navButton: {
+    width: 25,
+    height: 25,
   },
 });

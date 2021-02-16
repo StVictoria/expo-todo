@@ -3,8 +3,15 @@ import { View, Text, StyleSheet } from "react-native";
 
 export default function Settings() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Settings</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+});

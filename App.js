@@ -38,7 +38,11 @@ const headerOptions = (navigation, screen) => ({
 
 export default function App() {
   const [money, setMoney] = useState(0);
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([
+    // { id: 1, task: "Прочитать книгу" },
+    // { id: 2, task: "Приготовить пирог", amount: "200" },
+    // { id: 3, task: "рв", deadline: "14.84.2038" },
+  ]);
   const [availableMoney, setAvailableMoney] = useState(1000);
   const [spentMoney, setSpentMoney] = useState(null);
   const [userValues, setUserValues] = useState({

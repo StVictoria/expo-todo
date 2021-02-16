@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, FlatList, Alert } from "react-native";
+import { ScrollView, FlatList, Alert, StyleSheet } from "react-native";
 
 import Todo from "../common/Todo";
 
@@ -29,6 +29,7 @@ export default function MyTodos({ todos, money, setTodos, setMoney }) {
       <FlatList
         data={todos}
         keyExtractor={(item) => item.id}
+        style={styles.container}
         renderItem={({ item }) => (
           <Todo
             todo={item}
@@ -40,3 +41,10 @@ export default function MyTodos({ todos, money, setTodos, setMoney }) {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+});

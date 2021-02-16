@@ -8,9 +8,14 @@ export default function Todo({ todo, onTodoDone, onLongPressTodo }) {
       style={styles.todoButton}
       onLongPress={() => onLongPressTodo(todo.id)}
     >
-      <Text onPress={() => onTodoDone(todo.id, fieldValue.amount)}>DONE</Text>
+      <Text
+        style={styles.doneButton}
+        onPress={() => onTodoDone(todo.id, fieldValue.amount)}
+      >
+        DONE
+      </Text>
       <Text style={styles.todoTask}>{fieldValue.task}</Text>
-      <View>
+      <View style={styles.restInfo}>
         {fieldValue.amount && (
           <Text style={styles.todoRest}>{fieldValue.amount}</Text>
         )}
@@ -25,7 +30,7 @@ export default function Todo({ todo, onTodoDone, onLongPressTodo }) {
 const styles = StyleSheet.create({
   todoButton: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     borderStyle: "solid",
     borderWidth: 1,
@@ -35,7 +40,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
-  todoTask: { fontSize: 16 },
+  doneButton: { width: "15%" },
+  todoTask: { fontSize: 16, width: "60%", textAlign: "center" },
+  restInfo: { width: "25%" },
   todoRest: {
     fontSize: 12,
     color: "grey",

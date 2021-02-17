@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, FlatList, Alert, StyleSheet } from "react-native";
+import { FlatList, Alert, StyleSheet } from "react-native";
 
 import Todo from "../common/Todo";
 
@@ -24,21 +24,21 @@ export default function MyTodos({ todos, money, setTodos, setMoney }) {
 
     setMoney((prev) => Number(prev) + Number(reward));
   };
-  return (
-    <ScrollView>
-      <FlatList
-        data={todos}
-        keyExtractor={(item) => item.id}
-        style={styles.container}
-        renderItem={({ item }) => (
-          <Todo
-            todo={item}
-            onTodoDone={handleTodoDone}
-            onLongPressTodo={handleLongPressTodo}
-          />
-        )}
-      />
-    </ScrollView>
+  return todos ? (
+    <FlatList
+      data={todos}
+      keyExtractor={(item) => item.id}
+      style={styles.container}
+      renderItem={({ item }) => (
+        <Todo
+          todo={item}
+          onTodoDone={handleTodoDone}
+          onLongPressTodo={handleLongPressTodo}
+        />
+      )}
+    />
+  ) : (
+    <Text>Список пуст</Text>
   );
 }
 

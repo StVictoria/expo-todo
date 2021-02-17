@@ -1,17 +1,18 @@
 import React from "react";
 import {
-  TouchableHighlight,
   ScrollView,
   Text,
-  StyleSheet,
   TouchableOpacity,
   Image,
+  BackHandler,
 } from "react-native";
 
+import menuStyles from "./menuStyles";
 import plus from "../../assets/plus.png";
 import clipboard from "../../assets/clipboard.png";
 import bankMenu from "../../assets/bankMenu.png";
 import settings from "../../assets/settings.png";
+import logout from "../../assets/logout.png";
 
 const menuTiles = [
   { id: 1, title: "Новая задача", img: plus, color: "orange", link: "AddTodo" },
@@ -24,6 +25,7 @@ const menuTiles = [
   },
   { id: 3, title: "Мой счёт", img: bankMenu, color: "lime", link: "Account" },
   { id: 4, title: "Настройки", img: settings, color: "aqua", link: "Settings" },
+  { id: 5, title: "Выход", img: logout, link: "Logout" },
 ];
 
 export default function Menu({ navigation }) {
@@ -31,43 +33,20 @@ export default function Menu({ navigation }) {
     tiles.map((tile) => (
       <TouchableOpacity
         key={tile.id}
-        style={styles.tile}
-        onPress={() => navigation.navigate(tile.link)}
+        style={menuStyles.tile}
+        onPress={
+          tile.link !== "Logout"
+            ? () => navigation.navigate(tile.link)
+            : () => BackHandler.exitApp()
+        }
       >
-        <Image source={tile.img} style={styles.tileImg} />
-        <Text style={styles.tileTitle}>{tile.title}</Text>
+        <Image source={tile.img} style={menuStyles.tileImg} />
+        <Text style={menuStyles.tileTitle}>{tile.title}</Text>
       </TouchableOpacity>
     ));
   return (
-    <ScrollView contentContainerStyle={styles.menu}>
+    <ScrollView contentContainerStyle={menuStyles.menu}>
       {renderMenuTiles(menuTiles)}
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  menu: {
-    width: "100%",
-  },
-  tile: {
-    position: "relative",
-    justifyContent: "center",
-    alignItems: "center",
-    height: 170,
-    width: "100%",
-  },
-  tileImg: {
-    position: "absolute",
-    top: "50%",
-    marginTop: -30,
-    left: "50%",
-    marginLeft: -30,
-    width: 60,
-    height: 60,
-    opacity: 0.1,
-  },
-  tileTitle: {
-    fontSize: 30,
-    color: "black",
-  },
-});

@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput } from "react-native";
 
+import accountStyles from "./accountStyles";
 import Button from "../common/Button";
 
 const accountFields = [
@@ -8,7 +9,6 @@ const accountFields = [
     id: 1,
     name: "earnedMoney",
     title: "Заработано",
-    placeholder: "",
   },
   {
     id: 2,
@@ -51,25 +51,25 @@ export default function Account({
 
   const renderAccountFields = () =>
     accountFields.map((field) => (
-      <View key={field.id} style={styles.formContainer}>
-        <View style={styles.fieldContainer}>
-          <Text style={styles.label}>{field.title}</Text>
+      <View key={field.id} style={accountStyles.formContainer}>
+        <View style={accountStyles.fieldContainer}>
+          <Text style={accountStyles.label}>{field.title}</Text>
           {field.name !== "earnedMoney" ? (
             <TextInput
               autoCorrect={false}
               autoCapitalize="none"
-              keyboardType="number-pad"
+              keyboardType="numeric"
               contextMenuHidden={true}
               textAlign="center"
               placeholder={field.placeholder}
               value={field.name === "spentMoney" ? spentMoney : availableMoney}
-              style={styles.textInput}
+              style={accountStyles.textInput}
               onChange={({ nativeEvent }) =>
                 handleChangeAccountValues(nativeEvent.text, field)
               }
             />
           ) : (
-            <Text style={styles.earnedField}>{money}</Text>
+            <Text style={accountStyles.earnedField}>{money}</Text>
           )}
         </View>
         {field.name === "spentMoney" && (
@@ -88,33 +88,7 @@ export default function Account({
         )}
       </View>
     ));
-  return <View style={styles.addTodoBlock}>{renderAccountFields()}</View>;
+  return (
+    <View style={accountStyles.addTodoBlock}>{renderAccountFields()}</View>
+  );
 }
-
-const styles = StyleSheet.create({
-  addTodoBlock: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-  },
-  formContainer: { width: "100%", marginBottom: 20 },
-  fieldContainer: {
-    width: "100%",
-    textAlign: "center",
-    marginBottom: 10,
-  },
-  label: {
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  earnedField: { textAlign: "center", fontSize: 18, fontWeight: "bold" },
-  textInput: {
-    width: "100%",
-    padding: 10,
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "#777",
-    borderRadius: 50,
-  },
-});

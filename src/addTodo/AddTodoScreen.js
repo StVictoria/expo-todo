@@ -1,6 +1,7 @@
 import React from "react";
 import { View, TextInput, Text, Alert, StyleSheet } from "react-native";
 
+import addTodoStyles from "./addTodoStyles";
 import Button from "../common/Button";
 
 const fields = [
@@ -44,8 +45,8 @@ export default function AddTodo({ userValues, setUserValues, setTodos }) {
 
   const renderTextFields = () =>
     fields.map((field) => (
-      <>
-        <Text style={styles.label}>{field.title}</Text>
+      <View key={field.id} style={addTodoStyles.fieldContainer}>
+        <Text style={addTodoStyles.label}>{field.title}</Text>
         <TextInput
           autoCorrect={false}
           autoCapitalize="none"
@@ -55,12 +56,12 @@ export default function AddTodo({ userValues, setUserValues, setTodos }) {
           onChange={({ nativeEvent }) =>
             handleSetUserValues(nativeEvent.text, field)
           }
-          style={styles.textInput}
+          style={addTodoStyles.textInput}
         />
-      </>
+      </View>
     ));
   return (
-    <View style={styles.addTodoBlock}>
+    <View style={addTodoStyles.addTodoBlock}>
       {renderTextFields()}
       <Button
         name="Добавить"
@@ -71,27 +72,3 @@ export default function AddTodo({ userValues, setUserValues, setTodos }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  addTodoBlock: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-  },
-  fieldContainer: {
-    width: "100%",
-  },
-  label: {
-    marginBottom: 5,
-  },
-  textInput: {
-    width: "100%",
-    padding: 10,
-    marginBottom: 20,
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "#777",
-    borderRadius: 50,
-  },
-});

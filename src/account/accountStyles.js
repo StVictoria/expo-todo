@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
+
 export default StyleSheet.create({
-  addTodoBlock: {
+  addTaskBlock: {
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,

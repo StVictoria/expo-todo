@@ -4,9 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import MenuScreen from "./src/menu/MenuScreen";
-import AddTodoScreen from "./src/addTodo/AddTodoScreen";
+import AddTaskScreen from "./src/addTask/AddTaskScreen";
 import AccountScreen from "./src/account/AccountScreen";
-import MyTodosScreen from "./src/myTodos/MyTodosSreen";
+import MyTasksScreen from "./src/myTasks/MyTasksSreen";
 import SettingsScreen from "./src/settings/SettingsScreen";
 
 const Stack = createStackNavigator();
@@ -15,7 +15,7 @@ const commonOptions = (title) => ({ headerTitleAlign: "center", title: title });
 
 export default function App() {
   const [money, setMoney] = useState(0);
-  const [todos, setTodos] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [availableMoney, setAvailableMoney] = useState(1000);
   const [spentMoney, setSpentMoney] = useState(null);
   const [userValues, setUserValues] = useState({
@@ -41,25 +41,25 @@ export default function App() {
           </Stack.Screen>
 
           <Stack.Screen
-            name="AddTodo"
+            name="AddTask"
             options={commonOptions("Добавить задачу")}
           >
             {() => (
-              <AddTodoScreen
+              <AddTaskScreen
                 userValues={userValues}
                 setUserValues={setUserValues}
-                setTodos={setTodos}
+                setTasks={setTasks}
                 setMoney={setMoney}
               />
             )}
           </Stack.Screen>
 
-          <Stack.Screen name="MyTodos" options={commonOptions("Мои задачи")}>
+          <Stack.Screen name="MyTasks" options={commonOptions("Мои задачи")}>
             {() => (
-              <MyTodosScreen
-                todos={todos}
+              <MyTasksScreen
+                tasks={tasks}
                 money={money}
-                setTodos={setTodos}
+                setTasks={setTasks}
                 setMoney={setMoney}
               />
             )}

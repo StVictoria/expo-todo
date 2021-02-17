@@ -1,17 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 
-export default function Settings() {
+import settingsStyles from "./settingsStyles";
+
+export default function SettingsScreen() {
   return (
-    <View style={styles.container}>
+    <View style={settingsStyles.container}>
       <Text>Settings</Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-  },
-});

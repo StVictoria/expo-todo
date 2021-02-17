@@ -1,7 +1,7 @@
 import React from "react";
-import { View, TextInput, Text, Alert, StyleSheet } from "react-native";
+import { View, TextInput, Text, Alert } from "react-native";
 
-import addTodoStyles from "./addTodoStyles";
+import addTaskStyles from "./addTaskStyles";
 import Button from "../common/Button";
 
 const fields = [
@@ -21,12 +21,12 @@ const fields = [
   },
 ];
 
-export default function AddTodo({ userValues, setUserValues, setTodos }) {
+export default function AddTaskScreen({ userValues, setUserValues, setTasks }) {
   const handleSetUserValues = (value, field) => {
     setUserValues((prev) => ({ ...prev, [field.name]: value }));
   };
 
-  const handleAddTodo = () => {
+  const handleAddTask = () => {
     if (
       userValues.task === null ||
       (userValues.task !== null && !userValues.task.trim())
@@ -36,8 +36,8 @@ export default function AddTodo({ userValues, setUserValues, setTodos }) {
         "Напишите что необходимо сделать"
       );
     } else {
-      const newTodo = { id: Date.now().toString(), userFields: userValues };
-      setTodos((prevTodos) => [...prevTodos, newTodo]);
+      const newTask = { id: Date.now().toString(), userFields: userValues };
+      setTasks((prevTasks) => [...prevTasks, newTask]);
 
       setUserValues({ task: null, amount: null, deadline: null, notice: null });
     }
@@ -45,8 +45,8 @@ export default function AddTodo({ userValues, setUserValues, setTodos }) {
 
   const renderTextFields = () =>
     fields.map((field) => (
-      <View key={field.id} style={addTodoStyles.fieldContainer}>
-        <Text style={addTodoStyles.label}>{field.title}</Text>
+      <View key={field.id} style={addTaskStyles.fieldContainer}>
+        <Text style={addTaskStyles.label}>{field.title}</Text>
         <TextInput
           autoCorrect={false}
           autoCapitalize="none"
@@ -56,18 +56,18 @@ export default function AddTodo({ userValues, setUserValues, setTodos }) {
           onChange={({ nativeEvent }) =>
             handleSetUserValues(nativeEvent.text, field)
           }
-          style={addTodoStyles.textInput}
+          style={addTaskStyles.textInput}
         />
       </View>
     ));
   return (
-    <View style={addTodoStyles.addTodoBlock}>
+    <View style={addTaskStyles.addTaskBlock}>
       {renderTextFields()}
       <Button
         name="Добавить"
         color="#37AC0A"
         userValues={userValues}
-        onClick={handleAddTodo}
+        onClick={handleAddTask}
       />
     </View>
   );

@@ -89,6 +89,6 @@ export default function Account({
       </View>
     ));
   return (
-    <View style={accountStyles.addTodoBlock}>{renderAccountFields()}</View>
+    <View style={accountStyles.addTaskBlock}>{renderAccountFields()}</View>
   );
 }

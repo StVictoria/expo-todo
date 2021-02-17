@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
+
 export default StyleSheet.create({
-  todoButton: {
+  taskButton: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -13,9 +14,9 @@ export default StyleSheet.create({
     paddingHorizontal: 15,
   },
   doneButton: { width: "15%" },
-  todoTask: { fontSize: 16, width: "60%", textAlign: "center" },
-  restInfo: { width: "25%" },
-  todoRest: {
+  taskDescription: { fontSize: 16, width: "60%", textAlign: "center" },
+  restInfoBlock: { width: "25%" },
+  restInfoItem: {
     fontSize: 12,
     color: "grey",
     textAlign: "right",

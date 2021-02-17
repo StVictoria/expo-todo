@@ -15,20 +15,20 @@ import settings from "../../assets/settings.png";
 import logout from "../../assets/logout.png";
 
 const menuTiles = [
-  { id: 1, title: "Новая задача", img: plus, color: "orange", link: "AddTodo" },
+  { id: 1, title: "Новая задача", img: plus, color: "orange", link: "AddTask" },
   {
     id: 2,
     title: "Мои задачи",
     img: clipboard,
     color: "purple",
-    link: "MyTodos",
+    link: "MyTasks",
   },
   { id: 3, title: "Мой счёт", img: bankMenu, color: "lime", link: "Account" },
   { id: 4, title: "Настройки", img: settings, color: "aqua", link: "Settings" },
   { id: 5, title: "Выход", img: logout, link: "Logout" },
 ];
 
-export default function Menu({ navigation }) {
+export default function MenuScreen({ navigation }) {
   const renderMenuTiles = (tiles) =>
     tiles.map((tile) => (
       <TouchableOpacity

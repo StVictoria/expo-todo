@@ -1,11 +1,17 @@
-import React from "react";
-import { FlatList, Alert } from "react-native";
+import React, { useState, useEffect } from "react";
+import { FlatList, Alert, Text } from "react-native";
 
 import myTasksStyles from "./myTasksStyles";
 import Task from "./Task";
 
-export default function MyTasksScreen({ tasks, money, setTasks, setMoney }) {
-  const handleLongPressTask = (id) =>
+export default function MyTasksScreen({
+  tasks,
+  money,
+  setTasks,
+  setMoney,
+  onSaveItem,
+}) {
+  const handleLongPressTask = (id) => {
     Alert.alert(
       "Удалить задачу?",
       "Задачу нельзя будет вернуть. Средства не начислятся, т.к. задача не выполнена :(",
@@ -13,21 +19,27 @@ export default function MyTasksScreen({ tasks, money, setTasks, setMoney }) {
         { text: "Отмена", onPress: () => {} },
         {
           text: "Удалить",
-          onPress: () =>
-            setTasks((prev) => prev.filter((task) => task.id !== id)),
+          onPress: () => {
+            setTasks((prev) => prev.filter((task) => task.id !== id));
+            onSaveItem("tasks", tasks);
+          },
         },
       ],
       { cancelable: true }
     );
+  };
 
   const handleTaskDone = (id, reward) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
+    onSaveItem("tasks", tasks);
 
-    setMoney((prev) => Number(prev) + Number(reward));
+    setMoney(Number(money) + Number(reward));
+    onSaveItem("money", Number(money) + Number(reward));
   };
-  return tasks ? (
+
+  const renderMyTasks = (items) => (
     <FlatList
-      data={tasks}
+      data={items}
       keyExtractor={(item) => item.id}
       style={myTasksStyles.container}
       renderItem={({ item }) => (
@@ -38,7 +50,7 @@ export default function MyTasksScreen({ tasks, money, setTasks, setMoney }) {
         />
       )}
     />
-  ) : (
-    <Text>Список пуст</Text>
   );
+
+  return tasks ? renderMyTasks(tasks) : <Text>Список пуст</Text>;
 }

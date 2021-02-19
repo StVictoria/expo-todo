@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StatusBar, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -8,22 +8,33 @@ import AddTaskScreen from "./src/addTask/AddTaskScreen";
 import AccountScreen from "./src/account/AccountScreen";
 import MyTasksScreen from "./src/myTasks/MyTasksSreen";
 import SettingsScreen from "./src/settings/SettingsScreen";
+import { saveItemToStorage, getValueFor } from "./src/secureStorage/utils";
 
 const Stack = createStackNavigator();
 
 const commonOptions = (title) => ({ headerTitleAlign: "center", title: title });
 
 export default function App() {
-  const [money, setMoney] = useState(0);
+  // values for storage
   const [tasks, setTasks] = useState([]);
-  const [availableMoney, setAvailableMoney] = useState(1000);
-  const [spentMoney, setSpentMoney] = useState(null);
+  const [money, setMoney] = useState(0);
+  const [availableMoney, setAvailableMoney] = useState();
+
+  // values for local usage
+  const [spentMoney, setSpentMoney] = useState();
   const [userValues, setUserValues] = useState({
     task: null,
     amount: null,
     deadline: null,
     notice: null,
   });
+
+  // ComponentDidMount
+  useEffect(() => {
+    getValueFor("tasks", setTasks);
+    getValueFor("money", setMoney);
+    getValueFor("availableMoney", setAvailableMoney);
+  }, []);
 
   return (
     <>
@@ -48,8 +59,9 @@ export default function App() {
               <AddTaskScreen
                 userValues={userValues}
                 setUserValues={setUserValues}
+                tasks={tasks}
                 setTasks={setTasks}
-                setMoney={setMoney}
+                onSaveItem={saveItemToStorage}
               />
             )}
           </Stack.Screen>
@@ -61,6 +73,7 @@ export default function App() {
                 money={money}
                 setTasks={setTasks}
                 setMoney={setMoney}
+                onSaveItem={saveItemToStorage}
               />
             )}
           </Stack.Screen>
@@ -71,8 +84,10 @@ export default function App() {
                 money={money}
                 spentMoney={spentMoney}
                 availableMoney={availableMoney}
+                setMoney={setMoney}
                 setSpentMoney={setSpentMoney}
                 setAvailableMoney={setAvailableMoney}
+                onSaveItem={saveItemToStorage}
               />
             )}
           </Stack.Screen>
@@ -87,10 +102,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  navButton: {
-    width: 25,
-    height: 25,
-  },
-});

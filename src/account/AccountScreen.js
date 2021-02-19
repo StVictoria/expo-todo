@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Alert } from "react-native";
 
 import accountStyles from "./accountStyles";
 import Button from "../common/Button";
@@ -28,16 +28,22 @@ export default function Account({
   money,
   spentMoney,
   availableMoney,
+  setMoney,
   setSpentMoney,
   setAvailableMoney,
+  onSaveItem,
 }) {
   const handleCountAccountValues = (name) => {
     if (name === "spentMoney") {
-      setSpentMoney(spentMoney);
-      setMoney((prev) => Number(prev) - Number(spentMoney));
+      money === undefined
+        ? setMoney(0 - spentMoney)
+        : setMoney((prev) => Number(prev) - Number(spentMoney));
       setSpentMoney(null);
+      onSaveItem("money", money);
     } else if (name === "availableMoney") {
       setAvailableMoney(availableMoney);
+      onSaveItem("availableMoney", availableMoney);
+      Alert.alert("Сумма изменена");
     }
   };
 
@@ -69,7 +75,9 @@ export default function Account({
               }
             />
           ) : (
-            <Text style={accountStyles.earnedField}>{money}</Text>
+            <Text style={accountStyles.earnedField}>
+              {money === undefined ? 0 : money}
+            </Text>
           )}
         </View>
         {field.name === "spentMoney" && (
@@ -83,7 +91,7 @@ export default function Account({
           <Button
             name="Изменить доступную сумму"
             color="#0E0034"
-            onClick={() => onSubmit(field.name)}
+            onClick={() => handleCountAccountValues(field.name)}
           />
         )}
       </View>

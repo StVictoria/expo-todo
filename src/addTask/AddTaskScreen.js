@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TextInput, Text, Alert } from "react-native";
+import * as SecureStore from "expo-secure-store";
 
 import addTaskStyles from "./addTaskStyles";
 import Button from "../common/Button";
@@ -21,11 +22,16 @@ const fields = [
   },
 ];
 
-export default function AddTaskScreen({ userValues, setUserValues, setTasks }) {
+export default function AddTaskScreen({
+  userValues,
+  setUserValues,
+  tasks,
+  setTasks,
+  onSaveItem,
+}) {
   const handleSetUserValues = (value, field) => {
     setUserValues((prev) => ({ ...prev, [field.name]: value }));
   };
-
   const handleAddTask = () => {
     if (
       userValues.task === null ||
@@ -37,7 +43,9 @@ export default function AddTaskScreen({ userValues, setUserValues, setTasks }) {
       );
     } else {
       const newTask = { id: Date.now().toString(), userFields: userValues };
-      setTasks((prevTasks) => [...prevTasks, newTask]);
+
+      setTasks((prev) => [...prev, newTask]);
+      onSaveItem("tasks", [...tasks, newTask]);
 
       setUserValues({ task: null, amount: null, deadline: null, notice: null });
     }

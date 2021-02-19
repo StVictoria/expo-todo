@@ -8,7 +8,7 @@ export default StyleSheet.create({
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: "grey",
-    borderRadius: 50,
+    borderRadius: 5,
     marginVertical: 10,
     paddingVertical: 10,
     paddingHorizontal: 15,

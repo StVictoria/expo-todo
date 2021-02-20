@@ -41,6 +41,7 @@ export default function MyTasksScreen({
     <FlatList
       data={items}
       keyExtractor={(item) => item.id}
+      contentContainerStyle={{ alignItems: "center" }}
       style={myTasksStyles.container}
       renderItem={({ item }) => (
         <Task

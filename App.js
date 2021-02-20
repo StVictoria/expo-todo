@@ -18,7 +18,7 @@ export default function App() {
   // values for storage
   const [tasks, setTasks] = useState([]);
   const [money, setMoney] = useState(0);
-  const [availableMoney, setAvailableMoney] = useState();
+  // const [availableMoney, setAvailableMoney] = useState();
 
   // values for local usage
   const [spentMoney, setSpentMoney] = useState();
@@ -33,7 +33,7 @@ export default function App() {
   useEffect(() => {
     getValueFor("tasks", setTasks);
     getValueFor("money", setMoney);
-    getValueFor("availableMoney", setAvailableMoney);
+    // getValueFor("availableMoney", setAvailableMoney);
   }, []);
 
   return (
@@ -83,10 +83,8 @@ export default function App() {
               <AccountScreen
                 money={money}
                 spentMoney={spentMoney}
-                availableMoney={availableMoney}
                 setMoney={setMoney}
                 setSpentMoney={setSpentMoney}
-                setAvailableMoney={setAvailableMoney}
                 onSaveItem={saveItemToStorage}
               />
             )}

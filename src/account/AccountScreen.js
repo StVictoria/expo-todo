@@ -16,21 +16,19 @@ const accountFields = [
     title: "Потрачено",
     placeholder: "Введите сколько Вы потратили",
   },
-  {
-    id: 3,
-    name: "availableMoney",
-    title: "Вам доступно ещё",
-    placeholder: "Введите доступную для трат сумму",
-  },
+  // {
+  //   id: 3,
+  //   name: "availableMoney",
+  //   title: "Вам доступно ещё",
+  //   placeholder: "Введите доступную для трат сумму",
+  // },
 ];
 
 export default function Account({
   money,
   spentMoney,
-  availableMoney,
   setMoney,
   setSpentMoney,
-  setAvailableMoney,
   onSaveItem,
 }) {
   const handleCountAccountValues = (name) => {
@@ -68,7 +66,7 @@ export default function Account({
               contextMenuHidden={true}
               textAlign="center"
               placeholder={field.placeholder}
-              value={field.name === "spentMoney" ? spentMoney : availableMoney}
+              value={spentMoney}
               style={accountStyles.textInput}
               onChange={({ nativeEvent }) =>
                 handleChangeAccountValues(nativeEvent.text, field)
@@ -87,13 +85,13 @@ export default function Account({
             onClick={() => handleCountAccountValues(field.name)}
           />
         )}
-        {field.name === "availableMoney" && (
+        {/* {field.name === "availableMoney" && (
           <Button
             name="Изменить доступную сумму"
             color="#0E0034"
             onClick={() => handleCountAccountValues(field.name)}
           />
-        )}
+        )} */}
       </View>
     ));
   return (

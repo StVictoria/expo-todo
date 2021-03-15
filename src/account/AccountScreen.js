@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, TextInput, Alert } from "react-native";
 
 import accountStyles from "./accountStyles";
-import Button from "../common/Button";
 import Title from "../common/Title";
+import Button from "../common/Button";
 import { darkBlue } from "../styles/variables";
 
 const accountFields = [

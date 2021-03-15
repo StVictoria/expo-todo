@@ -3,8 +3,8 @@ import { View, TextInput, Text, Alert } from "react-native";
 import DatePicker from "react-native-datepicker";
 
 import addTaskStyles from "./addTaskStyles";
-import Button from "../common/Button";
 import Title from "../common/Title";
+import Button from "../common/Button";
 
 const fields = [
   {

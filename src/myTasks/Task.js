@@ -1,33 +1,65 @@
-import React from "react";
+import Checkbox from "expo-checkbox";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import taskStyles from "./taskStyles";
 
-export default function Task({ task, onTaskDone, onLongPressTask }) {
+export default function Task({
+  task,
+  onTaskDone,
+  onPressTask,
+  onLongPressTask,
+}) {
+  const [isOpen, setToggleOpen] = useState(false);
+
   const fieldValue = task.userFields;
+
   return (
     <TouchableOpacity
       style={taskStyles.taskButton}
+      activeOpacity={0.9}
       onLongPress={() => onLongPressTask(task.id)}
     >
-      <Ionicons
-        name="ios-checkmark-circle-outline"
-        size={24}
-        color="black"
-        style={taskStyles.doneButton}
-        onPress={() => onTaskDone(task.id, fieldValue.amount)}
-      />
+      <View style={taskStyles.mainInfo}>
+        <Checkbox
+          style={taskStyles.doneButton}
+          value={false}
+          onValueChange={() => onTaskDone(task.id, fieldValue.amount)}
+        />
 
-      <Text style={taskStyles.taskDescription}>{fieldValue.task}</Text>
-      <View style={taskStyles.restInfoBlock}>
-        {fieldValue.amount && (
-          <Text style={taskStyles.restInfoItem}>{fieldValue.amount}</Text>
-        )}
-        {fieldValue.deadline && (
-          <Text style={taskStyles.restInfoItem}>до {fieldValue.deadline}</Text>
-        )}
+        <Text style={taskStyles.taskDescription}>{fieldValue.task}</Text>
+
+        <Ionicons
+          name="caret-down-circle-outline"
+          size={30}
+          color="black"
+          onPress={() => {
+            setToggleOpen(!isOpen);
+          }}
+        />
       </View>
+
+      {isOpen ? (
+        //вынести в отдельную функцию рендера
+        <View style={taskStyles.restInfoBlock}>
+          {fieldValue.notice && (
+            <Text style={taskStyles.restInfoItem}>
+              Примечание: {fieldValue.notice}
+            </Text>
+          )}
+          {fieldValue.amount && (
+            <Text style={taskStyles.restInfoItem}>
+              Награда: {fieldValue.amount}
+            </Text>
+          )}
+          {fieldValue.deadline && (
+            <Text style={taskStyles.restInfoItem}>
+              Сделать до {fieldValue.deadline}
+            </Text>
+          )}
+        </View>
+      ) : null}
     </TouchableOpacity>
   );
 }

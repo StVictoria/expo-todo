@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FlatList, Alert, Text, View } from "react-native";
 
 import myTasksStyles from "./myTasksStyles";
-import Task from "./Task";
 import Title from "../common/Title";
+import Task from "./Task";
 
 export default function MyTasksScreen({
   tasks,

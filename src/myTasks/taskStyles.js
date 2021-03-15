@@ -2,10 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   taskButton: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    width: "99%",
+    width: "100%",
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "#000",
@@ -18,14 +15,27 @@ export default StyleSheet.create({
     elevation: 4,
     marginVertical: 10,
     paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 8,
   },
-  doneButton: { width: "10%" },
-  taskDescription: { fontSize: 16, width: "65%", textAlign: "center" },
-  restInfoBlock: { width: "25%" },
+  mainInfo: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "100%",
+  },
+  doneButton: { marginRight: 5 },
+  taskDescription: { fontSize: 16, width: "75%", textAlign: "left" },
+  restInfoBlock: {
+    width: "90%",
+    marginTop: 10,
+    paddingLeft: "12%",
+  },
   restInfoItem: {
     fontSize: 12,
-    color: "grey",
-    textAlign: "right",
+    marginBottom: 8,
+  },
+  buttonsBlock: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });

@@ -93,15 +93,17 @@ export default function AddTaskScreen({
       </View>
     ));
   return (
-    <View style={addTaskStyles.addTaskBlock}>
+    <View>
       <Title title="Добавить задачу" />
-      {renderTextFields()}
-      <Button
-        name="Добавить"
-        color="#37AC0A"
-        userValues={userValues}
-        onClick={handleAddTask}
-      />
+      <View style={addTaskStyles.addTaskBlock}>
+        {renderTextFields()}
+        <Button
+          name="Добавить"
+          color="#37AC0A"
+          userValues={userValues}
+          onClick={handleAddTask}
+        />
+      </View>
     </View>
   );
 }

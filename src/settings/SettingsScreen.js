@@ -6,8 +6,9 @@ import Title from "../common/Title";
 
 export default function SettingsScreen() {
   return (
-    <View style={settingsStyles.container}>
+    <View>
       <Title title="Настройки" />
+      <View style={settingsStyles.container} />
     </View>
   );
 }

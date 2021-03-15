@@ -4,6 +4,7 @@ import { View, Text, TextInput, Alert } from "react-native";
 import accountStyles from "./accountStyles";
 import Button from "../common/Button";
 import Title from "../common/Title";
+import { darkBlue } from "../styles/variables";
 
 const accountFields = [
   {
@@ -82,23 +83,23 @@ export default function Account({
         {field.name === "spentMoney" && (
           <Button
             name="Рассчитать остаток"
-            color="#0E0034"
+            color={darkBlue}
             onClick={() => handleCountAccountValues(field.name)}
           />
         )}
         {/* {field.name === "availableMoney" && (
           <Button
             name="Изменить доступную сумму"
-            color="#0E0034"
+            color={darkBlue}
             onClick={() => handleCountAccountValues(field.name)}
           />
         )} */}
       </View>
     ));
   return (
-    <View style={accountStyles.addTaskBlock}>
+    <View>
       <Title title="Мои средства" />
-      {renderAccountFields()}
+      <View style={accountStyles.addTaskBlock}>{renderAccountFields()}</View>
     </View>
   );
 }

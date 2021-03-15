@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
 
+import { darkBlue } from "../styles/variables";
+
 export default StyleSheet.create({
   navbar: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    backgroundColor: "#0E0034",
+    backgroundColor: darkBlue,
     height: 90,
     paddingHorizontal: 20,
   },

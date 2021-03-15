@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, Alert, Text } from "react-native";
+import { FlatList, Alert, Text, View } from "react-native";
 
 import myTasksStyles from "./myTasksStyles";
 import Task from "./Task";
@@ -55,9 +55,9 @@ export default function MyTasksScreen({
   );
 
   return (
-    <>
+    <View>
       <Title title="Мои задачи" />
       {tasks ? renderMyTasks(tasks) : <Text>Список пуст</Text>}
-    </>
+    </View>
   );
 }

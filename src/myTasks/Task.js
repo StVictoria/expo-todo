@@ -46,9 +46,7 @@ export default function Task({
         //вынести в отдельную функцию рендера
         <View style={taskStyles.restInfoBlock}>
           {fieldValue.notice && (
-            <Text style={taskStyles.restInfoItem}>
-              Примечание: {fieldValue.notice}
-            </Text>
+            <Text style={taskStyles.restInfoItem}>{fieldValue.notice}</Text>
           )}
           {fieldValue.amount && (
             <Text style={taskStyles.restInfoItem}>

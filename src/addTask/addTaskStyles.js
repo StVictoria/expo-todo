@@ -8,16 +8,16 @@ export default StyleSheet.create({
     paddingVertical: 20,
   },
   fieldContainer: {
-    width: "100%",
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    width: "90%",
   },
-  label: {
-    marginBottom: 5,
-  },
+  icon: { marginRight: 10, marginTop: -30 },
   textInput: {
     width: "100%",
     padding: 10,
-    marginBottom: 20,
+    marginBottom: 30,
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: "#777",

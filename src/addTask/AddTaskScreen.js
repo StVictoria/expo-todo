@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Text, Alert } from "react-native";
 import DatePicker from "react-native-datepicker";
+import { Ionicons } from "@expo/vector-icons";
 
 import addTaskStyles from "./addTaskStyles";
 import Title from "../common/Title";
@@ -12,14 +13,22 @@ const fields = [
     name: "task",
     title: "Что необходимо сделать?",
     placeholder: "Например, прочитать книгу",
+    icon: "rocket",
   },
-  { id: 2, name: "amount", title: "Награда", placeholder: "800" },
-  { id: 3, name: "deadline", title: "Дедлайн", placeholder: "20.02.2021" },
+  { id: 2, name: "amount", title: "Награда", placeholder: "800", icon: "cash" },
+  {
+    id: 3,
+    name: "deadline",
+    title: "Дедлайн",
+    placeholder: "20.02.2021",
+    icon: "calendar",
+  },
   {
     id: 4,
     name: "notice",
     title: "Примечание",
-    placeholder: "",
+    placeholder: "Детали задачи",
+    icon: "ellipsis-horizontal-circle-sharp",
   },
 ];
 
@@ -55,7 +64,12 @@ export default function AddTaskScreen({
   const renderTextFields = () =>
     fields.map((field) => (
       <View key={field.id} style={addTaskStyles.fieldContainer}>
-        <Text style={addTaskStyles.label}>{field.title}</Text>
+        <Ionicons
+          name={field.icon}
+          style={addTaskStyles.icon}
+          size={30}
+          color="black"
+        />
         {field.name !== "deadline" ? (
           <TextInput
             autoCorrect={false}

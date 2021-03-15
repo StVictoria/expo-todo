@@ -98,6 +98,8 @@ export default function AddTaskScreen({
       <View style={addTaskStyles.addTaskBlock}>
         {renderTextFields()}
         <Button
+          isStartIcon
+          icon="md-add"
           name="Добавить"
           color="#37AC0A"
           userValues={userValues}

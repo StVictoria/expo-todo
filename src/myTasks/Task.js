@@ -31,7 +31,9 @@ export default function Task({
         <Text style={taskStyles.taskDescription}>{fieldValue.task}</Text>
 
         <Ionicons
-          name="caret-down-circle-outline"
+          name={
+            !isOpen ? "caret-down-circle-outline" : "caret-up-circle-outline"
+          }
           size={30}
           color="black"
           onPress={() => {

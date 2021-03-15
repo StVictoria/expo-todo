@@ -23,4 +23,7 @@ export default StyleSheet.create({
     borderColor: "#777",
     borderRadius: 50,
   },
+  datePicker: {
+    padding: 5,
+  },
 });

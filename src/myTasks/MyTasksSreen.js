@@ -3,6 +3,7 @@ import { FlatList, Alert, Text } from "react-native";
 
 import myTasksStyles from "./myTasksStyles";
 import Task from "./Task";
+import Title from "../common/Title";
 
 export default function MyTasksScreen({
   tasks,
@@ -53,5 +54,10 @@ export default function MyTasksScreen({
     />
   );
 
-  return tasks ? renderMyTasks(tasks) : <Text>Список пуст</Text>;
+  return (
+    <>
+      <Title title="Мои задачи" />
+      {tasks ? renderMyTasks(tasks) : <Text>Список пуст</Text>}
+    </>
+  );
 }

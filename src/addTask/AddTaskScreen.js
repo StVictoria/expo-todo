@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TextInput, Text, Alert } from "react-native";
-import * as SecureStore from "expo-secure-store";
+import DatePicker from "react-native-datepicker";
 
 import addTaskStyles from "./addTaskStyles";
 import Button from "../common/Button";
+import Title from "../common/Title";
 
 const fields = [
   {
@@ -55,21 +56,45 @@ export default function AddTaskScreen({
     fields.map((field) => (
       <View key={field.id} style={addTaskStyles.fieldContainer}>
         <Text style={addTaskStyles.label}>{field.title}</Text>
-        <TextInput
-          autoCorrect={false}
-          autoCapitalize="none"
-          textAlign="center"
-          placeholder={field.placeholder}
-          value={userValues[field.name]}
-          onChange={({ nativeEvent }) =>
-            handleSetUserValues(nativeEvent.text, field)
-          }
-          style={addTaskStyles.textInput}
-        />
+        {field.name !== "deadline" ? (
+          <TextInput
+            autoCorrect={false}
+            autoCapitalize="none"
+            textAlign="center"
+            placeholder={field.placeholder}
+            value={userValues[field.name]}
+            onChange={({ nativeEvent }) =>
+              handleSetUserValues(nativeEvent.text, field)
+            }
+            style={addTaskStyles.textInput}
+          />
+        ) : (
+          <DatePicker
+            date={userValues.deadline}
+            mode="date"
+            placeholder="20.01.2030"
+            format="DD.MM.YYYY"
+            minDate="01.01.2016"
+            style={[addTaskStyles.textInput, addTaskStyles.datePicker]}
+            customStyles={{
+              dateIcon: {
+                display: "none",
+              },
+              dateInput: {
+                borderWidth: 0,
+                "background-color": "green",
+              },
+            }}
+            onDateChange={(date) => {
+              handleSetUserValues(date, field);
+            }}
+          />
+        )}
       </View>
     ));
   return (
     <View style={addTaskStyles.addTaskBlock}>
+      <Title title="Добавить задачу" />
       {renderTextFields()}
       <Button
         name="Добавить"

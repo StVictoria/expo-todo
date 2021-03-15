@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import MenuScreen from "./src/menu/MenuScreen";
 import AddTaskScreen from "./src/addTask/AddTaskScreen";
@@ -10,9 +11,9 @@ import MyTasksScreen from "./src/myTasks/MyTasksSreen";
 import SettingsScreen from "./src/settings/SettingsScreen";
 import { saveItemToStorage, getValueFor } from "./src/secureStorage/utils";
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-const commonOptions = (title) => ({ headerTitleAlign: "center", title: title });
+const commonOptions = (title) => ({ headerTitleAlign: "center", title: "" });
 
 export default function App() {
   // values for storage
@@ -25,7 +26,7 @@ export default function App() {
   const [userValues, setUserValues] = useState({
     task: null,
     amount: null,
-    deadline: null,
+    deadline: "",
     notice: null,
   });
 
@@ -40,33 +41,35 @@ export default function App() {
     <>
       <StatusBar hidden={true} />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Menu">
-          <Stack.Screen name="Menu" options={commonOptions("Меню")}>
-            {({ navigation }) => (
-              <MenuScreen
-                navigation={navigation}
-                money={money}
-                setMoney={setMoney}
-              />
-            )}
-          </Stack.Screen>
+        <Tab.Navigator
+          showLabel="false"
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
 
-          <Stack.Screen
-            name="AddTask"
-            options={commonOptions("Добавить задачу")}
-          >
-            {() => (
-              <AddTaskScreen
-                userValues={userValues}
-                setUserValues={setUserValues}
-                tasks={tasks}
-                setTasks={setTasks}
-                onSaveItem={saveItemToStorage}
-              />
-            )}
-          </Stack.Screen>
+              if (route.name === "MyTasks") {
+                iconName = "list";
+              } else if (route.name === "AddTask") {
+                iconName = "add-circle-outline";
+              } else if (route.name === "Account") {
+                iconName = "cash-outline";
+              } else if (route.name === "Settings") {
+                iconName = "ios-settings-outline";
+              }
 
-          <Stack.Screen name="MyTasks" options={commonOptions("Мои задачи")}>
+              // You can return any component that you like here!
+              return (
+                <Ionicons
+                  name={iconName}
+                  size={30}
+                  color={color}
+                  style={{ marginBottom: -13 }}
+                />
+              );
+            },
+          })}
+        >
+          <Tab.Screen name="MyTasks" options={commonOptions("Мои задачи")}>
             {() => (
               <MyTasksScreen
                 tasks={tasks}
@@ -76,9 +79,21 @@ export default function App() {
                 onSaveItem={saveItemToStorage}
               />
             )}
-          </Stack.Screen>
+          </Tab.Screen>
 
-          <Stack.Screen name="Account" options={commonOptions("Мои средства")}>
+          <Tab.Screen name="AddTask" options={commonOptions("Добавить задачу")}>
+            {() => (
+              <AddTaskScreen
+                userValues={userValues}
+                setUserValues={setUserValues}
+                tasks={tasks}
+                setTasks={setTasks}
+                onSaveItem={saveItemToStorage}
+              />
+            )}
+          </Tab.Screen>
+
+          <Tab.Screen name="Account" options={commonOptions("Мои средства")}>
             {() => (
               <AccountScreen
                 money={money}
@@ -88,14 +103,14 @@ export default function App() {
                 onSaveItem={saveItemToStorage}
               />
             )}
-          </Stack.Screen>
+          </Tab.Screen>
 
-          <Stack.Screen
+          <Tab.Screen
             name="Settings"
             options={commonOptions("Настройки")}
             component={SettingsScreen}
           />
-        </Stack.Navigator>
+        </Tab.Navigator>
       </NavigationContainer>
     </>
   );

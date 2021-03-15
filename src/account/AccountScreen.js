@@ -3,6 +3,7 @@ import { View, Text, TextInput, Alert } from "react-native";
 
 import accountStyles from "./accountStyles";
 import Button from "../common/Button";
+import Title from "../common/Title";
 
 const accountFields = [
   {
@@ -95,6 +96,9 @@ export default function Account({
       </View>
     ));
   return (
-    <View style={accountStyles.addTaskBlock}>{renderAccountFields()}</View>
+    <View style={accountStyles.addTaskBlock}>
+      <Title title="Мои средства" />
+      {renderAccountFields()}
+    </View>
   );
 }

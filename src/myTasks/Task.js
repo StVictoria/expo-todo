@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import taskStyles from "./taskStyles";
 
@@ -10,12 +11,14 @@ export default function Task({ task, onTaskDone, onLongPressTask }) {
       style={taskStyles.taskButton}
       onLongPress={() => onLongPressTask(task.id)}
     >
-      <Text
+      <Ionicons
+        name="ios-checkmark-circle-outline"
+        size={24}
+        color="black"
         style={taskStyles.doneButton}
         onPress={() => onTaskDone(task.id, fieldValue.amount)}
-      >
-        DONE
-      </Text>
+      />
+
       <Text style={taskStyles.taskDescription}>{fieldValue.task}</Text>
       <View style={taskStyles.restInfoBlock}>
         {fieldValue.amount && (

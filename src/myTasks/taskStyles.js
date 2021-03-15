@@ -20,8 +20,8 @@ export default StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
   },
-  doneButton: { width: "15%" },
-  taskDescription: { fontSize: 16, width: "60%", textAlign: "center" },
+  doneButton: { width: "10%" },
+  taskDescription: { fontSize: 16, width: "65%", textAlign: "center" },
   restInfoBlock: { width: "25%" },
   restInfoItem: {
     fontSize: 12,

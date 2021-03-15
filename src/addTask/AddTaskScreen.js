@@ -73,7 +73,7 @@ export default function AddTaskScreen({
             date={userValues.deadline}
             mode="date"
             placeholder="20.01.2030"
-            format="DD.MM.YYYY"
+            format="DD.MM.YY"
             minDate="01.01.2016"
             style={[addTaskStyles.textInput, addTaskStyles.datePicker]}
             customStyles={{

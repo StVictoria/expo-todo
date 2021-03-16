@@ -24,7 +24,7 @@ export default StyleSheet.create({
     width: "100%",
   },
   doneButton: { marginRight: 5 },
-  taskDescription: { fontSize: 16, width: "75%", textAlign: "left" },
+  taskDescription: { fontSize: 16, width: "80%", textAlign: "left" },
   restInfoBlock: {
     width: "90%",
     marginTop: 10,

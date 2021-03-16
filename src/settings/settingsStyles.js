@@ -6,14 +6,16 @@ export default StyleSheet.create({
   container: {
     marginTop: -30,
   },
+  itemBlock: {
+    borderBottomColor: grey_light,
+    borderBottomWidth: 1,
+    padding: 20,
+  },
   item: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    padding: 20,
-    borderBottomColor: grey_light,
-    borderBottomWidth: 1,
   },
   itemTitle: {
     flexDirection: "row",
@@ -28,4 +30,6 @@ export default StyleSheet.create({
   expandIcon: {
     textAlign: "right",
   },
+  expandedInfo: { paddingLeft: 40 },
+  expandedInfoItem: { marginTop: 10 },
 });

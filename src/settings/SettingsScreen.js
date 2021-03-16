@@ -39,7 +39,7 @@ export default function SettingsScreen() {
 
         <Ionicons
           name="chevron-down"
-          size={23}
+          size={22}
           color={item.color}
           style={settingsStyles.expandIcon}
         />

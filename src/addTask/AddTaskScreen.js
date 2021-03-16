@@ -14,22 +14,28 @@ const fields = [
     name: "task",
     title: "Что необходимо сделать?",
     placeholder: "Например, прочитать книгу",
-    icon: "rocket",
+    icon: "rocket-outline",
   },
-  { id: 2, name: "amount", title: "Награда", placeholder: "800", icon: "cash" },
+  {
+    id: 2,
+    name: "amount",
+    title: "Награда",
+    placeholder: "800",
+    icon: "cash-outline",
+  },
   {
     id: 3,
     name: "deadline",
     title: "Дедлайн",
     placeholder: "20.02.2021",
-    icon: "calendar",
+    icon: "calendar-outline",
   },
   {
     id: 4,
     name: "notice",
     title: "Примечание",
     placeholder: "Детали задачи",
-    icon: "ellipsis-horizontal-circle-sharp",
+    icon: "ellipsis-horizontal-circle",
   },
 ];
 

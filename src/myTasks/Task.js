@@ -31,10 +31,8 @@ export default function Task({
         <Text style={taskStyles.taskDescription}>{fieldValue.task}</Text>
 
         <Ionicons
-          name={
-            !isOpen ? "caret-down-circle-outline" : "caret-up-circle-outline"
-          }
-          size={30}
+          name={!isOpen ? "chevron-down" : "chevron-up"}
+          size={22}
           color="black"
           onPress={() => {
             setToggleOpen(!isOpen);

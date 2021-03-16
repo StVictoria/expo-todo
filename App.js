@@ -9,7 +9,7 @@ import AccountScreen from "./src/account/AccountScreen";
 import MyTasksScreen from "./src/myTasks/MyTasksSreen";
 import SettingsScreen from "./src/settings/SettingsScreen";
 import { saveItemToStorage, getValueFor } from "./src/secureStorage/utils";
-import { orange_dark, grey_xlight } from "./src/styles/variables";
+import { orange_dark, grey_normal } from "./src/styles/variables";
 
 const Tab = createBottomTabNavigator();
 
@@ -69,7 +69,7 @@ export default function App() {
           })}
           tabBarOptions={{
             activeTintColor: orange_dark,
-            inactiveTintColor: grey_xlight,
+            inactiveTintColor: grey_normal,
           }}
         >
           <Tab.Screen name="MyTasks" options={commonOptions("Мои задачи")}>

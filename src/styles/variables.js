@@ -32,6 +32,6 @@ export const black = "rgba(0, 0, 0, 0.87)";
 export const grey_light = "rgba(0, 0, 0, 0.38)";
 export const grey_normal = "rgba(0, 0, 0, 0.54)";
 export const grey_dark = "#303030";
-export const gery_xlight = "rgba(0, 0, 0, 0.12)";
+export const grey_xlight = "rgba(0, 0, 0, 0.12)";
 
 export const white = "#fafafa";

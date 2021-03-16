@@ -4,9 +4,9 @@ import DatePicker from "react-native-datepicker";
 import { Ionicons } from "@expo/vector-icons";
 
 import addTaskStyles from "./addTaskStyles";
+import { black, green_normal } from "../styles/variables";
 import Title from "../common/Title";
 import Button from "../common/Button";
-import { black } from "../styles/variables";
 
 const fields = [
   {
@@ -116,7 +116,7 @@ export default function AddTaskScreen({
           isStartIcon
           icon="md-add"
           name="Добавить"
-          color="#37AC0A"
+          color={green_normal}
           userValues={userValues}
           onClick={handleAddTask}
         />

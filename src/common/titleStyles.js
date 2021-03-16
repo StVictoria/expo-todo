@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { darkBlue } from "../styles/variables";
+import { black, white } from "../styles/variables";
 
 export default StyleSheet.create({
   titleContainer: {
@@ -8,10 +8,11 @@ export default StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     height: 60,
-    backgroundColor: darkBlue,
+    backgroundColor: black,
+    marginBottom: 30,
   },
   title: {
     fontSize: 20,
-    color: "white",
+    color: white,
   },
 });

@@ -5,15 +5,15 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 20,
   },
   fieldContainer: {
+    position: "relative",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: "90%",
+    width: "100%",
   },
-  icon: { marginRight: 10, marginTop: -30 },
+  icon: { position: "absolute", top: 8, left: 10 },
   textInput: {
     width: "100%",
     padding: 10,

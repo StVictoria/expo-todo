@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import addTaskStyles from "./addTaskStyles";
 import Title from "../common/Title";
 import Button from "../common/Button";
+import { black } from "../styles/variables";
 
 const fields = [
   {
@@ -68,13 +69,14 @@ export default function AddTaskScreen({
           name={field.icon}
           style={addTaskStyles.icon}
           size={30}
-          color="black"
+          color={black}
         />
         {field.name !== "deadline" ? (
           <TextInput
-            autoCorrect={false}
-            autoCapitalize="none"
+            multiline
             textAlign="center"
+            keyboardType={field.name === "amount" ? "number-pad" : "default"}
+            contextMenuHidden={false}
             placeholder={field.placeholder}
             value={userValues[field.name]}
             onChange={({ nativeEvent }) =>
@@ -88,7 +90,7 @@ export default function AddTaskScreen({
             mode="date"
             placeholder="20.01.2030"
             format="DD.MM.YY"
-            minDate="01.01.2016"
+            minDate="01.01.2021"
             style={[addTaskStyles.textInput, addTaskStyles.datePicker]}
             customStyles={{
               dateIcon: {
@@ -96,7 +98,6 @@ export default function AddTaskScreen({
               },
               dateInput: {
                 borderWidth: 0,
-                "background-color": "green",
               },
             }}
             onDateChange={(date) => {

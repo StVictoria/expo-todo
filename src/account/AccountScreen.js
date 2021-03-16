@@ -4,7 +4,7 @@ import { View, Text, TextInput, Alert } from "react-native";
 import accountStyles from "./accountStyles";
 import Title from "../common/Title";
 import Button from "../common/Button";
-import { darkBlue } from "../styles/variables";
+import { black } from "../styles/variables";
 
 const accountFields = [
   {
@@ -83,7 +83,7 @@ export default function Account({
         {field.name === "spentMoney" && (
           <Button
             name="Рассчитать остаток"
-            color={darkBlue}
+            color={black}
             onClick={() => handleCountAccountValues(field.name)}
           />
         )}

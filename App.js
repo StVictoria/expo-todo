@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-import MenuScreen from "./src/menu/MenuScreen";
 import AddTaskScreen from "./src/addTask/AddTaskScreen";
 import AccountScreen from "./src/account/AccountScreen";
 import MyTasksScreen from "./src/myTasks/MyTasksSreen";
 import SettingsScreen from "./src/settings/SettingsScreen";
 import { saveItemToStorage, getValueFor } from "./src/secureStorage/utils";
+import { orange_dark, grey_xlight } from "./src/styles/variables";
 
 const Tab = createBottomTabNavigator();
 
@@ -67,6 +67,10 @@ export default function App() {
               );
             },
           })}
+          tabBarOptions={{
+            activeTintColor: orange_dark,
+            inactiveTintColor: grey_xlight,
+          }}
         >
           <Tab.Screen name="MyTasks" options={commonOptions("Мои задачи")}>
             {() => (

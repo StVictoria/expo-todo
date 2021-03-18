@@ -55,7 +55,7 @@ export default function MyTasksScreen({
   );
 
   return (
-    <View>
+    <View style={myTasksStyles.myTasks}>
       <Title title="Мои задачи" />
       {tasks ? renderMyTasks(tasks) : <Text>Список пуст</Text>}
     </View>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, TextInput, Text, Alert } from "react-native";
+import React from "react";
+import { View, TextInput } from "react-native";
 import DatePicker from "react-native-datepicker";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -7,6 +7,7 @@ import addTaskStyles from "./addTaskStyles";
 import { black, green_normal } from "../styles/variables";
 import Title from "../common/Title";
 import Button from "../common/Button";
+import { messageWindow } from "../utils/helpers";
 
 const fields = [
   {
@@ -50,11 +51,9 @@ export default function AddTaskScreen({
     setUserValues((prev) => ({ ...prev, [field.name]: value }));
   };
   const handleAddTask = () => {
-    if (
-      userValues.task === null ||
-      (userValues.task !== null && !userValues.task.trim())
-    ) {
-      Alert.alert(
+    const task = userValues.task;
+    if (task === null || (task !== null && !task.trim())) {
+      messageWindow(
         "Задача не должна быть пустой",
         "Напишите что необходимо сделать"
       );
@@ -64,6 +63,10 @@ export default function AddTaskScreen({
       setTasks((prev) => [...prev, newTask]);
       onSaveItem("tasks", [...tasks, newTask]);
 
+      messageWindow(
+        "Задача успешно создана!",
+        "Можете проверить на вкладке Мои задачи"
+      );
       setUserValues({ task: null, amount: null, deadline: null, notice: null });
     }
   };

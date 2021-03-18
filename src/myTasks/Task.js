@@ -19,6 +19,9 @@ export default function Task({
     <TouchableOpacity
       style={taskStyles.taskButton}
       activeOpacity={0.9}
+      onPress={() => {
+        setToggleOpen(!isOpen);
+      }}
       onLongPress={() => onLongPressTask(task.id)}
     >
       <View style={taskStyles.mainInfo}>
@@ -34,28 +37,25 @@ export default function Task({
           name={!isOpen ? "chevron-down" : "chevron-up"}
           size={22}
           color="black"
-          onPress={() => {
-            setToggleOpen(!isOpen);
-          }}
         />
       </View>
 
       {isOpen ? (
         //вынести в отдельную функцию рендера
         <View style={taskStyles.restInfoBlock}>
-          {fieldValue.notice && (
+          {fieldValue.notice ? (
             <Text style={taskStyles.restInfoItem}>{fieldValue.notice}</Text>
-          )}
-          {fieldValue.amount && (
+          ) : null}
+          {fieldValue.amount ? (
             <Text style={taskStyles.restInfoItem}>
               Награда: {fieldValue.amount}
             </Text>
-          )}
-          {fieldValue.deadline && (
+          ) : null}
+          {fieldValue.deadline ? (
             <Text style={taskStyles.restInfoItem}>
               Сделать до {fieldValue.deadline}
             </Text>
-          )}
+          ) : null}
         </View>
       ) : null}
     </TouchableOpacity>

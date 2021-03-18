@@ -34,25 +34,29 @@ export default function Account({
   onSaveItem,
 }) {
   const handleCountAccountValues = (name) => {
-    if (name === "spentMoney") {
-      money === undefined
-        ? setMoney(0 - spentMoney)
-        : setMoney((prev) => Number(prev) - Number(spentMoney));
-      setSpentMoney(null);
-      onSaveItem("money", money);
-    } else if (name === "availableMoney") {
-      setAvailableMoney(availableMoney);
-      onSaveItem("availableMoney", availableMoney);
-      Alert.alert("Сумма изменена");
+    if (spentMoney) {
+      if (name === "spentMoney") {
+        money === undefined
+          ? setMoney(0 - spentMoney)
+          : setMoney((prev) => Number(prev) - Number(spentMoney));
+        setSpentMoney(null);
+        onSaveItem("money", money);
+      }
+      // else if (name === "availableMoney") {
+      //   setAvailableMoney(availableMoney);
+      //   onSaveItem("availableMoney", availableMoney);
+      //   Alert.alert("Сумма изменена");
+      // }
     }
   };
 
   const handleChangeAccountValues = (value, field) => {
     if (field.name === "spentMoney") {
       setSpentMoney(value);
-    } else if (field.name === "availableMoney") {
-      setAvailableMoney(value);
     }
+    // else if (field.name === "availableMoney") {
+    //   setAvailableMoney(value);
+    // }
   };
 
   const renderAccountFields = () =>

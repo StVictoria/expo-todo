@@ -9,7 +9,6 @@ export default StyleSheet.create({
     width: "100%",
     height: 60,
     backgroundColor: black,
-    marginBottom: 30,
   },
   title: {
     fontSize: 20,

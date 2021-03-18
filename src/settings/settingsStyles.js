@@ -5,6 +5,7 @@ import { grey_light } from "../styles/variables";
 export default StyleSheet.create({
   container: {
     marginTop: -30,
+    paddingTop: 30,
   },
   itemBlock: {
     borderBottomColor: grey_light,

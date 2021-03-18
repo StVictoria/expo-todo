@@ -5,6 +5,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
+    paddingTop: 30,
   },
   formContainer: { width: "100%", marginBottom: 20 },
   fieldContainer: {

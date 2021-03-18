@@ -5,12 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import taskStyles from "./taskStyles";
 
-export default function Task({
-  task,
-  onTaskDone,
-  onPressTask,
-  onLongPressTask,
-}) {
+export default function Task({ task, onTaskDone, onLongPressTask }) {
   const [isOpen, setToggleOpen] = useState(false);
 
   const fieldValue = task.userFields;

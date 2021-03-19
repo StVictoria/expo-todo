@@ -15,14 +15,13 @@ import Title from "../common/Title";
 const settingItems = [
   {
     id: 1,
-    title: "Помощь по приложению",
-    icon: "help-circle-outline",
+    title: "Разработчик, алло!",
+    icon: "code-working-outline",
     color: black,
-    link: "help",
     info: [
       {
         id: 11,
-        infoTitle: "Скоро появится возможность редактирования заданий!",
+        infoTitle: "Возможность редактирования заданий.",
       },
       {
         id: 12,
@@ -41,32 +40,51 @@ const settingItems = [
       },
       {
         id: 15,
-        infoTitle:
-          "Есть окно отзыва на действия (например, добавил задание и в ответ окно с уведомлением, что оно добавлено).",
+        infoTitle: "Создать архив с выполненными заданиями. (low)",
       },
     ],
   },
   {
     id: 2,
+    title: "Помощь по приложению",
+    icon: "help-circle-outline",
+    color: black,
+    info: [
+      {
+        id: 21,
+        infoTitle:
+          "Чтобы отметить задание как сделанное, нужно отметить его в чекбоксе слева от названия. Средства будут автоматически начислены на счёт.",
+      },
+      {
+        id: 22,
+        infoTitle:
+          "Что бы удалить созданное задание, зажмите карточку задания и выберите в открывшемся окне 'Удалить'",
+      },
+    ],
+  },
+  {
+    id: 3,
     title: "Выход",
     icon: "md-exit-outline",
     color: black,
-    link: "exit",
   },
 ];
 
 export default function SettingsScreen() {
-  const [isOpen, setToggleOpen] = useState(false);
+  const [id, setId] = useState(null);
   const handleExit = () => BackHandler.exitApp();
-
   const renderSettingItems = () =>
     settingItems.map((item) => (
-      <View style={settingsStyles.itemBlock}>
+      <View key={item.id} style={settingsStyles.itemBlock}>
         <TouchableOpacity
           style={settingsStyles.item}
           activeOpacity={0.5}
           onPress={
-            item.title === "Выход" ? handleExit : () => setToggleOpen(!isOpen)
+            item.title === "Выход"
+              ? handleExit
+              : id === null
+              ? () => setId(item.id)
+              : () => setId(null)
           }
         >
           <View style={settingsStyles.itemTitle}>
@@ -80,24 +98,23 @@ export default function SettingsScreen() {
           </View>
           {item.title !== "Выход" ? (
             <Ionicons
-              name="chevron-down"
+              name={id !== item.id ? "chevron-down" : "chevron-up"}
               size={22}
               color={item.color}
               style={settingsStyles.expandIcon}
             />
           ) : null}
         </TouchableOpacity>
-        <View
-          style={settingsStyles.expandedInfo}
-          style={!isOpen && { display: "none" }}
-        >
-          {item.info &&
-            item.info.map((infoItem) => (
-              <Text style={settingsStyles.expandedInfoItem}>
-                {infoItem.infoTitle}
-              </Text>
-            ))}
-        </View>
+        {id === item.id && (
+          <View style={settingsStyles.expandedInfo}>
+            {item.info &&
+              item.info.map((infoItem) => (
+                <Text key={infoItem.id} style={settingsStyles.expandedInfoItem}>
+                  {infoItem.infoTitle}
+                </Text>
+              ))}
+          </View>
+        )}
       </View>
     ));
 

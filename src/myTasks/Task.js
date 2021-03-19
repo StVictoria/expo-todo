@@ -9,7 +9,7 @@ export default function Task({ task, onTaskDone, onLongPressTask }) {
   const [isOpen, setToggleOpen] = useState(false);
 
   const fieldValue = task.userFields;
-
+  console.log(task.amount);
   return (
     <TouchableOpacity
       style={taskStyles.taskButton}
@@ -36,7 +36,6 @@ export default function Task({ task, onTaskDone, onLongPressTask }) {
       </View>
 
       {isOpen ? (
-        //вынести в отдельную функцию рендера
         <View style={taskStyles.restInfoBlock}>
           {fieldValue.notice ? (
             <Text style={taskStyles.restInfoItem}>{fieldValue.notice}</Text>
